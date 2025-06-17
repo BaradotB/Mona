@@ -1,0 +1,29 @@
+@import ../../../Styles/global
+
+@keyframes ticker
+	0% 
+		transform: translateZ(0)
+	to
+		transform: translate3d(-100%, 0, 0)
+	
+.runLine
+	height: 40px
+	overflow: hidden
+	width: 100%
+	left: 0
+	&_wrapper
+		display: flex
+		align-items: center
+		background-color: $main-color	
+		height: 100%
+		&_item
+			text-transform: uppercase
+			font-family: 'Merriweather', serif
+			font-size: 19px
+			font-weight: 400
+			letter-spacing: 6px
+			color: white
+			animation: ticker 25s linear infinite
+			white-space: nowrap
+			flex-shrink: 0
+			padding-right: 6px
