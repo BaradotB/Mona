@@ -1,35 +1,32 @@
 import 'react'
 import './CatalogStyle.min.css'
 import { Link } from 'react-router-dom'
+import { useContext } from 'react'
+import { ProductsContext } from '../../../ProductsContext.jsx'
 
 export default function CatalogComponent() {
+	const { categories, products } = useContext(ProductsContext)
+
+	// Функция для поиска первого товара в категории
+	const getFirstProductImage = category => {
+		const product = products.find(p => p.category === category)
+		return `https://lh3.googleusercontent.com/d/${product.image_file}=s500`
+	}
+
 	return (
 		<div className="catalog_body">
 			<h2>НАШИ ТОВАРЫ</h2>
-			<div className="catalog_item">
-				<img
-					src="https://marmeladmall34.ru/wp-content/uploads/2019/01/og_og_1457357093212044457.jpg"
-					alt="img"
-				/>
-				<div className="catalog_title">СЛАДОСТИ</div>
-				<Link to="#" />
-			</div>
-			<div className="catalog_item">
-				<img
-					src="https://cdn1.ozone.ru/s3/multimedia-1-2/7020512282.jpg"
-					alt="img"
-				/>
-				<div className="catalog_title">ЛАПША</div>
-				<Link to="#" />
-			</div>
-			<div className="catalog_item">
-				<img
-					src="https://avatars.mds.yandex.net/i?id=911742eedc09f4b576664f57be8d2b89_l-5369423-images-thumbs&n=13"
-					alt="img"
-				/>
-				<div className="catalog_title">НАПИТКИ</div>
-				<Link to="#" />
-			</div>
+			{categories.map(item => (
+				<div className="catalog_item" key={item}>
+					<img
+						src={getFirstProductImage(item)}
+						alt={item}
+						className="catalog_image"
+					/>
+					<div className="catalog_title">{item}</div>
+					<Link to={`/shop/${item}`} className="catalog_link" />
+				</div>
+			))}
 		</div>
 	)
 }

@@ -35,6 +35,7 @@ export function OrderProvider({ children }) {
 		addToOrder,
 		removeFromOrder,
 		orderSize: order.size,
+		setOrder,
 	}
 
 	return <OrderContext.Provider value={value}>{children}</OrderContext.Provider>
